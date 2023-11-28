@@ -12,7 +12,7 @@ namespace CafeManiaApi.MVC
         public static void Main(string[] args)
         {
 
-            Environment.SetEnvironmentVariable("ProductionConnection", "Server=localhost;Port=5433;Database=CafeMania;User Id=postgres;Password=admin;");
+            Environment.SetEnvironmentVariable("ProductionConnection", "Server=ep-round-fog-74041599.us-east-2.aws.neon.tech;Port=5432;Database=CafeManiaV1;User Id=RafaelPJosephino;Password=molH8dGwtUQ5;");
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -29,8 +29,10 @@ namespace CafeManiaApi.MVC
             if (!app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
-
+            app.UseCors("AllowSpecificOrigin");
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "CafeManiaApi V1"); });
 

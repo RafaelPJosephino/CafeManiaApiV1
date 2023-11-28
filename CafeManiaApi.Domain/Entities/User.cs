@@ -48,5 +48,6 @@ namespace CafeManiaApi.Domain.Entities
             Password = password;
             IsAdmin = isAdmin;
         }
+      
     }
 }

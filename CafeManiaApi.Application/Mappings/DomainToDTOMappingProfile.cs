@@ -14,6 +14,7 @@ namespace CafeManiaApi.Application.Mappings
         public DomainToDTOMappingProfile() 
         {
             CreateMap<User, UserDTO>();
+            CreateMap<Product, ProductDTO>();
         }
     }
 }

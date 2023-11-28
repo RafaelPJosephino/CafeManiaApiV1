@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using CafeManiaApi.Domain.Entities;
 
 namespace CafeManiaApi.Infra.Ioc
 {
@@ -29,6 +30,11 @@ namespace CafeManiaApi.Infra.Ioc
                         EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
                         ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
                     });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder => { builder.WithOrigins("http://localhost:3000"); });
+            });
             services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo("/root/.aspnet/DataProtection-Keys"));
             services.AddSwaggerGen(c =>
             {
@@ -37,6 +43,9 @@ namespace CafeManiaApi.Infra.Ioc
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+
 
             return services;
         }
