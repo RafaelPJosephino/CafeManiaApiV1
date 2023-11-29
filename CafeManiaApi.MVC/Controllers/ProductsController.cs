@@ -30,7 +30,7 @@ namespace CafeManiaApi.MVC.Controllers
             }
         }
 
-        [HttpPost("RegisterUser")]
+        [HttpPost("RegisterProduct")]
         public IActionResult RegisterProduct(ProductDTO product)
         {
             try
