@@ -15,37 +15,40 @@ namespace CafeManiaApi.Domain.Entities
         public string Image { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public int Amount { get; set; }
         public decimal Price { get; set; }
 
-        public Product(int id, string image, string title, string description, decimal price)
+        public Product(int id, string image, string title, string description, decimal price, int amount)
         {
             DomainExceptionValidation.When(id < 0, "Error: Invalid Id");
 
             Id = id;
-            ValidateDomain( image, title, description, price);
+            ValidateDomain(image, title, description, price, amount);
         }
 
-        public Product(string image, string title, string description, decimal price)
+        public Product(string image, string title, string description, decimal price, int amount)
         {
-            ValidateDomain( image, title, description, price); 
+            ValidateDomain(image, title, description, price, amount);
         }
 
-        public void Update(string image, string title, string description, decimal price) 
+        public void Update(string image, string title, string description, decimal price, int amount) 
         {
-            ValidateDomain(image, title, description, price);
+            ValidateDomain(image, title, description, price, amount);
         }
 
-        public void ValidateDomain(string image, string title, string description, decimal price)
+        public void ValidateDomain(string image, string title, string description, decimal price, int amount)
         {
             
             DomainExceptionValidation.When(title.Length > 200, "Error: Title exceeds maximum length of 200 characters");
             DomainExceptionValidation.When(description.Length > 200, "Error: Description exceeds maximum length of 200 characters");
             DomainExceptionValidation.When(price < 0, "Error: Invalid price, less than 0");
+            DomainExceptionValidation.When(amount < 0, "Error: Invalid amount, less than 0");
 
             Image = image;
             Title = title;
             Description = description;
             Price = price;
+            Amount = amount;
         }
 
     }

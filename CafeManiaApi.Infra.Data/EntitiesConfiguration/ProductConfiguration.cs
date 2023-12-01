@@ -17,9 +17,10 @@ namespace CafeManiaApi.Infra.Data.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Image).IsRequired();
+            builder.Property(x => x.Amount).IsRequired(); 
             builder.Property(x => x.Title).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Price).IsRequired();
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.Description).HasMaxLength(200);
 
         }
     }
