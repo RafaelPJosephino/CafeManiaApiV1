@@ -21,7 +21,12 @@ namespace CafeManiaApi.Infra.Data.EntitiesConfiguration
             builder.Property(x => x.Email).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(200);
             builder.Property(x => x.IsAdmin).IsRequired();
+            builder.Property(x => x.Street).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.City).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.State).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.ZipCode).IsRequired().HasMaxLength(20);
 
+          
         }
     }
 }

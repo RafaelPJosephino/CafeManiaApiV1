@@ -23,11 +23,16 @@ namespace CafeManiaApi.Infra.Data.Repositories
             return _context.Product.ToList();
         }
 
-        public void RegisterProduct(Product product)
+        public void AddProduct(Product product)
         {
             _context.Add(product);
             _context.SaveChanges();
         }
-
+        public void removeProduct(int id)
+        {
+            var produto = _context.Product.First(x => x.Id == id);
+            _context.Remove(produto);
+            _context.SaveChanges();
+        }
     }
 }

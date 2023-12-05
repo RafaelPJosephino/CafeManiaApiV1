@@ -9,6 +9,7 @@ namespace CafeManiaApi.Application.Mappings
         public DTOToDomainMappingProfile()
         {
             CreateMap<ProductDTO, Product>();
+            CreateMap<UserDTO, User>();
         }
     }
 }

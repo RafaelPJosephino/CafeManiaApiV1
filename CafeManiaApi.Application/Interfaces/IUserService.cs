@@ -5,6 +5,8 @@ namespace CafeManiaApi.Application.Interfaces
     public interface IUserService
     {
         IEnumerable<UserDTO> GetUserAll();
-        void RegisterUser(UserDTO user);
+        void AddUser(UserDTO user);
+        void UpdateUser(UserDTO user);
+        UserDTO LoginUser(UserDTO user);
     }
 }

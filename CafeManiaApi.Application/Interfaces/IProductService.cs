@@ -6,5 +6,6 @@ namespace CafeManiaApi.Application.Interfaces
     {
         IEnumerable<ProductDTO> GetProductsAll();
         void RegisterProduct(ProductDTO Product);
+        void RemoverProduct(int idProduct);
     }
 }

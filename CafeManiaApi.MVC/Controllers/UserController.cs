@@ -36,7 +36,7 @@ namespace CafeManiaApi.MVC.Controllers
         {
             try
             {
-                _userService.RegisterUser(user);
+                _userService.AddUser(user);
                 return Ok();
             }
             catch (Exception e)
@@ -46,6 +46,44 @@ namespace CafeManiaApi.MVC.Controllers
             }
             
         }
+
+        [HttpPost("UpdateUser")]
+        public IActionResult UpdateUser(UserDTO user)
+        {
+            try
+            {
+                _userService.UpdateUser(user);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Error:" + e);
+
+            }
+
+        }
+
+
+        [HttpPost("LoginUser")]
+        public IActionResult LoginUser(UserDTO user)
+        {
+            try
+            {
+                return Ok(_userService.LoginUser(user));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Error:" + e);
+
+            }
+
+        }
+
+
+
+
+
+
 
     }
 }

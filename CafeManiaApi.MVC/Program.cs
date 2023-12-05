@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using CafeManiaApi.MVC.MappingConfig;
 using CafeManiaApi.Application.Interfaces;
 using CafeManiaApi.Application.Services;
+using Microsoft.Extensions.Options;
 
 namespace CafeManiaApi.MVC
 {
@@ -12,7 +13,7 @@ namespace CafeManiaApi.MVC
         public static void Main(string[] args)
         {
 
-            Environment.SetEnvironmentVariable("ProductionConnection", "Server=ep-round-fog-74041599.us-east-2.aws.neon.tech;Port=5432;Database=CafeManiaV1;User Id=RafaelPJosephino;Password=molH8dGwtUQ5;");
+            Environment.SetEnvironmentVariable("ProductionConnection", "Server=ep-round-fog-74041599.us-east-2.aws.neon.tech;Port=5432;Database=CafeManiaV1;User Id=RafaelPJosephino;Password=molH8dGwtUQ5;Include Error Detail=True;");
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ namespace CafeManiaApi.MVC
             builder.Services.AddAutoMapperConfiguration();
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-            
+
             var app = builder.Build();
 
             

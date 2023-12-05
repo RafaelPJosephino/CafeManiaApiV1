@@ -3,6 +3,7 @@ using System;
 using CafeManiaApi.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CafeManiaApi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231204181953_migrationv3")]
+    partial class migrationv3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +99,7 @@ namespace CafeManiaApi.Infra.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductOrder");
+                    b.ToTable("ProductOrder", (string)null);
                 });
 
             modelBuilder.Entity("CafeManiaApi.Domain.Entities.User", b =>
@@ -158,7 +161,7 @@ namespace CafeManiaApi.Infra.Data.Migrations
             modelBuilder.Entity("CafeManiaApi.Domain.Entities.Order", b =>
                 {
                     b.HasOne("CafeManiaApi.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -169,9 +172,9 @@ namespace CafeManiaApi.Infra.Data.Migrations
             modelBuilder.Entity("CafeManiaApi.Domain.Entities.ProductOrder", b =>
                 {
                     b.HasOne("CafeManiaApi.Domain.Entities.Order", "Order")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CafeManiaApi.Domain.Entities.Product", "Product")
@@ -185,9 +188,9 @@ namespace CafeManiaApi.Infra.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("CafeManiaApi.Domain.Entities.Order", b =>
+            modelBuilder.Entity("CafeManiaApi.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

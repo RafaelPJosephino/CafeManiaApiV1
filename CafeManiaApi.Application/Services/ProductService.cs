@@ -17,13 +17,23 @@ namespace CafeManiaApi.Application.Services
         }
         public void RegisterProduct(ProductDTO product)
         {
-            var mapUser = _mapper.Map<Product>(product);
-            _productRepository.RegisterProduct(mapUser);
+            var Produto = _mapper.Map<Product>(product);
+            _productRepository.AddProduct(Produto);
+        }
+
+        public void RemoverProduct(int idproduct)
+        {
+            _productRepository.removeProduct(idproduct);
         }
 
         public IEnumerable<ProductDTO> GetProductsAll()
         {
-            return _mapper.Map<IEnumerable<ProductDTO>>(_productRepository.GetProductsAll());
+            var ListaProdutos = _productRepository.GetProductsAll();
+            return _mapper.Map<IEnumerable<ProductDTO>>(ListaProdutos);
         }
+
+        
+
+
     }
 }

@@ -21,7 +21,8 @@ namespace CafeManiaApi.MVC.Controllers
 
             try
             {
-                return Ok(_ProductService.GetProductsAll());
+                var ret = _ProductService.GetProductsAll();
+                return Ok(ret);
             }
             catch (Exception e)
             {
@@ -45,6 +46,23 @@ namespace CafeManiaApi.MVC.Controllers
             }
 
         }
+
+        [HttpPost("RemoverProduct")]
+        public IActionResult RemoverProduct(int idproduct)
+        {
+            try
+            {
+                _ProductService.RemoverProduct(idproduct);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Error:" + e);
+
+            }
+
+        }
+
 
     }
 }

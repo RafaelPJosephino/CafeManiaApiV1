@@ -3,6 +3,7 @@ using System;
 using CafeManiaApi.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CafeManiaApi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231204215445_migrationv6")]
+    partial class migrationv6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +97,8 @@ namespace CafeManiaApi.Infra.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductId")
+                        .IsUnique();
 
                     b.ToTable("ProductOrder");
                 });
@@ -175,8 +179,8 @@ namespace CafeManiaApi.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CafeManiaApi.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                        .WithOne()
+                        .HasForeignKey("CafeManiaApi.Domain.Entities.ProductOrder", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

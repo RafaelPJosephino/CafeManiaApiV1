@@ -5,7 +5,7 @@
 namespace CafeManiaApi.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationInicial : Migration
+    public partial class migrationv8 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

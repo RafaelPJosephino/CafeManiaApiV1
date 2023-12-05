@@ -3,6 +3,7 @@ using System;
 using CafeManiaApi.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CafeManiaApi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231204180927_migrationv2")]
+    partial class migrationv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,6 +86,9 @@ namespace CafeManiaApi.Infra.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("integer");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
@@ -155,10 +161,25 @@ namespace CafeManiaApi.Infra.Data.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.Property<int>("OrdersId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("OrdersId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("CafeManiaApi.Domain.Entities.Order", b =>
                 {
                     b.HasOne("CafeManiaApi.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -169,9 +190,9 @@ namespace CafeManiaApi.Infra.Data.Migrations
             modelBuilder.Entity("CafeManiaApi.Domain.Entities.ProductOrder", b =>
                 {
                     b.HasOne("CafeManiaApi.Domain.Entities.Order", "Order")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CafeManiaApi.Domain.Entities.Product", "Product")
@@ -185,9 +206,24 @@ namespace CafeManiaApi.Infra.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("CafeManiaApi.Domain.Entities.Order", b =>
+            modelBuilder.Entity("OrderProduct", b =>
                 {
-                    b.Navigation("Products");
+                    b.HasOne("CafeManiaApi.Domain.Entities.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CafeManiaApi.Domain.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CafeManiaApi.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

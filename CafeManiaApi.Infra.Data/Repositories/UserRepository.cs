@@ -1,11 +1,8 @@
 ﻿using CafeManiaApi.Domain.Entities;
 using CafeManiaApi.Domain.Interfaces;
 using CafeManiaApi.Infra.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace CafeManiaApi.Infra.Data.Repositories
 {
@@ -23,9 +20,32 @@ namespace CafeManiaApi.Infra.Data.Repositories
             return _context.User.ToList();
         }
 
-        public void RegisterUser(User user)
+        public User GetUserById(int id)
         {
+            return _context.User.Find(id) ?? throw new Exception($"Usuário não localizado com id {id}");
+        }
+
+        public void AddUser(User user)
+        {
+            if (_context.User
+                .AsNoTracking()
+                .Where(x => x.Email == user.Email)
+                .Any())
+            {
+                throw new CustomAttributeFormatException("Email ja cadastrado");
+            }
+
             _context.Add(user);
+            _context.SaveChanges();
+        }
+        public User LoginUser(User user)
+        {
+            return _context.User.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.Update(user);
             _context.SaveChanges();
         }
 
