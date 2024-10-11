@@ -22,6 +22,7 @@ namespace CafeManiaApi.MVC
             builder.Services.AddAutoMapperConfiguration();
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            builder.Services.AddHealthChecks();
 
             var app = builder.Build();
 
@@ -43,7 +44,10 @@ namespace CafeManiaApi.MVC
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => {
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapControllers(); 
+            });
 
             app.Run();
         }
