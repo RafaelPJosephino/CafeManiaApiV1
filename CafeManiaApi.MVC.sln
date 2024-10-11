@@ -3,29 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManiaApi.MVC", "CafeManiaApi.MVC\CafeManiaApi.MVC.csproj", "{ECEE7021-EF1C-4C2D-AB2A-51652B81B6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManiaApi.MVC", "CafeManiaApi.MVC\CafeManiaApi.MVC.csproj", "{ECEE7021-EF1C-4C2D-AB2A-51652B81B6DF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{14577AA3-0F52-4189-A6EE-461D617448CD} = {14577AA3-0F52-4189-A6EE-461D617448CD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManiaApi.Application", "CafeManiaApi.Application\CafeManiaApi.Application.csproj", "{36437DDD-E091-44DF-9EB0-EADBEB6E81A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManiaApi.Application", "CafeManiaApi.Application\CafeManiaApi.Application.csproj", "{36437DDD-E091-44DF-9EB0-EADBEB6E81A7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D74CDC2E-D804-4041-B8F8-0562B7E67777} = {D74CDC2E-D804-4041-B8F8-0562B7E67777}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManiaApi.Domain", "CafeManiaApi.Domain\CafeManiaApi.Domain.csproj", "{D74CDC2E-D804-4041-B8F8-0562B7E67777}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManiaApi.Domain", "CafeManiaApi.Domain\CafeManiaApi.Domain.csproj", "{D74CDC2E-D804-4041-B8F8-0562B7E67777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManiaApi.Infra.Data", "CafeManiaApi.Infra.Data\CafeManiaApi.Infra.Data.csproj", "{43E2AF5A-F03D-416D-9A33-A0EB49639B1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManiaApi.Infra.Data", "CafeManiaApi.Infra.Data\CafeManiaApi.Infra.Data.csproj", "{43E2AF5A-F03D-416D-9A33-A0EB49639B1D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{36437DDD-E091-44DF-9EB0-EADBEB6E81A7} = {36437DDD-E091-44DF-9EB0-EADBEB6E81A7}
 		{D74CDC2E-D804-4041-B8F8-0562B7E67777} = {D74CDC2E-D804-4041-B8F8-0562B7E67777}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManiaApi.Infra.Ioc", "CafeManiaApi.Infra.Ioc\CafeManiaApi.Infra.Ioc.csproj", "{14577AA3-0F52-4189-A6EE-461D617448CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManiaApi.Infra.Ioc", "CafeManiaApi.Infra.Ioc\CafeManiaApi.Infra.Ioc.csproj", "{14577AA3-0F52-4189-A6EE-461D617448CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{36437DDD-E091-44DF-9EB0-EADBEB6E81A7} = {36437DDD-E091-44DF-9EB0-EADBEB6E81A7}
 		{43E2AF5A-F03D-416D-9A33-A0EB49639B1D} = {43E2AF5A-F03D-416D-9A33-A0EB49639B1D}
 		{D74CDC2E-D804-4041-B8F8-0562B7E67777} = {D74CDC2E-D804-4041-B8F8-0562B7E67777}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{1D9AEE70-CEC7-4E0C-BB1E-F402B11E6844}"
+	ProjectSection(SolutionItems) = preProject
+		CafeManiaApi.MVC\Dockerfile = CafeManiaApi.MVC\Dockerfile
 	EndProjectSection
 EndProject
 Global
