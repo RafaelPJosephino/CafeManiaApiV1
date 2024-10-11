@@ -4,10 +4,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["CafeManiaApi.MVC.csproj", "./"]
-RUN dotnet restore "CafeManiaApi.MVC.csproj"
+COPY ["CafeManiaApi.MVC/CafeManiaApi.MVC.csproj", "CafeManiaApi.MVC/"]
+RUN dotnet restore "CafeManiaApi.MVC/CafeManiaApi.MVC.csproj"
+
+
 COPY . .
-WORKDIR "/src/"
+WORKDIR "/src/CafeManiaApi.MVC"
 RUN dotnet build "CafeManiaApi.MVC.csproj" -c Release -o /app/build
 
 FROM build AS publish
